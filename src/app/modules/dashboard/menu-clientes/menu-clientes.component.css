@@ -1,0 +1,54 @@
+table{
+    width: 100%;
+}
+
+th{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.columnaID{
+    width: 5%;
+    text-align: center;
+    border-bottom: 1px solid #9E9E9E;
+}
+
+.columnaNombre{
+    width: 8% !important;
+    text-align: center;
+    border-bottom: 1px solid #9E9E9E;
+}
+
+.columnaApellido{
+    width: 8% !important;
+    text-align: center;
+    border-bottom: 1px solid #9E9E9E;
+}
+
+.columnaNroDocumento{
+    width: 8% !important;
+    text-align: center;
+    border-bottom: 1px solid #9E9E9E;
+}
+
+.columnaTelefono{
+    width: 10% !important;
+    text-align: center;
+    border-bottom: 1px solid #9E9E9E;
+}
+
+.columnaDireccion{
+    width: 10% !important;
+    text-align: center;
+    border-bottom: 1px solid #9E9E9E;
+}
+
+.columnaOpciones{
+    width: 10% !important;
+    text-align: center;
+    border-bottom: 1px solid #9E9E9E;
+}
+
+.tituloTabla{
+    font-weight: bold;
+}

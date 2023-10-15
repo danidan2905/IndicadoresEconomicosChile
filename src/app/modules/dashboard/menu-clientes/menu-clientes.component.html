@@ -1,0 +1,57 @@
+<h2>Menú de clientes</h2>
+<hr/>
+<button mat-raised-button color="primary" routerLink="registrarCliente">Registrar cliente</button>
+<br>
+<br>
+
+<span class="tituloTabla">Clientes registrados:</span>
+<table mat-table [dataSource]="clientes" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef class="columnaID"> ID </th>
+      <td mat-cell *matCellDef="let element" class="columnaID"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef class="columnaNombre"> Nombre </th>
+      <td mat-cell *matCellDef="let element" class="columnaNombre"> {{element.nombre}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="apellido">
+      <th mat-header-cell *matHeaderCellDef class="columnaApellido"> Apellido </th>
+      <td mat-cell *matCellDef="let element" class="columnaApellido"> {{element.apellido}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="nroDocumento">
+      <th mat-header-cell *matHeaderCellDef class="columnaNroDocumento"> Nro Documento </th>
+      <td mat-cell *matCellDef="let element" class="columnaNroDocumento"> {{element.nroDocumento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef class="columnaTelefono"> Teléfono </th>
+      <td mat-cell *matCellDef="let element" class="columnaTelefono"> {{element.telefono}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="direccion">
+      <th mat-header-cell *matHeaderCellDef class="columnaDireccion"> Dirección </th>
+      <td mat-cell *matCellDef="let element" class="columnaDireccion"> {{element.direccion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="opciones">
+      <th mat-header-cell *matHeaderCellDef class="columnaOpciones">Opciones</th>
+      <td mat-cell *matCellDef="let element" class="columnaOpciones">
+        <button routerLink="editarCliente" mat-icon-button color="primary" aria-label="Example icon button with a delete icon" (click)="enviarCliente(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" aria-label="Example icon button with a delete icon" (click)="borrarCliente(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let fila; columns: columnas;"></tr>
+</table>

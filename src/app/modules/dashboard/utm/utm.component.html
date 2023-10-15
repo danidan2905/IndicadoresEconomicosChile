@@ -1,0 +1,30 @@
+<div style="height: 530px;">
+    <h2>Unidad Tributaria Mensual (UTM)</h2>
+    <hr/>
+    <mat-form-field>
+        <mat-label>Filtrar por año</mat-label>
+        <mat-select [(value)] = "filtroYear" (selectionChange) = "dataFiltroYear(filtroYear)">
+        <mat-option value="2023">2023</mat-option>
+        <mat-option value="2022">2022</mat-option>
+        <mat-option value="2021">2021</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <h3><span><b>Año:</b> {{filtroYear}}</span><span><b>Fuente:</b> {{fuente}}</span><span><b>Unidad de medida:</b> {{unidad_medida}}</span></h3>
+    
+    <ngx-charts-line-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [legend]="legend"
+    [legendTitle]="legendTitle"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [autoScale]="true"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="false"
+    [results]="dataFiltradaFecha"
+    >
+    </ngx-charts-line-chart>
+</div>

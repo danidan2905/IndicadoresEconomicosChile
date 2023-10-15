@@ -1,0 +1,27 @@
+.nav-container{
+    display: grid;
+    grid-template-columns: 90% 10%;
+    width: 100%;
+}
+
+li{
+    text-align: left;
+    font-size: 19px;
+    padding-left: 15px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    transition: ease-in-out 0.3s background-color;
+}
+
+mat-drawer{
+    padding: 0 !important;
+}
+
+li:hover{
+    background-color: #BDBDBD;
+}
+
+mat-drawer-content{
+    height: 80vh;
+    padding: 1rem;
+}

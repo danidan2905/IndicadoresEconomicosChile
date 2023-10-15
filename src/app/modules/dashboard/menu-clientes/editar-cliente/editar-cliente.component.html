@@ -1,0 +1,73 @@
+<h2>Editar datos del cliente</h2>
+
+<form>
+
+    <div style="width: 190px;">
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput [formControl]="nombre">
+        </mat-form-field>
+        <br>
+        <span [hidden]="!(nombre.value == '') || nombre.pristine">
+            - El nombre es obligatorio.
+        </span>
+        <span [hidden]="!nombre.errors?.['minlength']">
+            - 3 carácters mínimo.
+        </span>
+        <span [hidden]="!nombre.errors?.['maxlength']">
+            - 20 carácters máximo.
+        </span>
+    </div>
+    <div style="width: 190px;">
+        <mat-form-field>
+            <mat-label>Apellido</mat-label>
+            <input matInput [formControl]="apellido">
+        </mat-form-field>
+        <br>
+        <span [hidden]="!(apellido.value == '') || apellido.pristine">
+            - El apellido es obligatorio.
+        </span>
+        <span [hidden]="!apellido.errors?.['minlength']">
+            - 3 carácters mínimo.
+        </span>
+        <span [hidden]="!apellido.errors?.['maxlength']">
+            - 20 carácters máximo.
+        </span>
+    </div>
+    
+    <div style="width: 190px;">
+        <mat-form-field>
+            <mat-label>Documento</mat-label>
+            <input matInput [formControl]="documento">
+        </mat-form-field>
+        <br>
+        <div class="documento" [hidden]="documento.valid || (documento.value == '')">
+            Documento inválido<br>
+            (Ej: 123.456.789)
+        </div>
+        <div class="documento" [hidden]="!(documento.value == '') || documento.pristine">
+            - Documento obligatorio
+        </div>
+    </div>
+    
+    <div style="width: 190px;">
+        <mat-form-field>
+            <mat-label>Teléfono (opcional)</mat-label>
+            <input matInput [formControl]="telefono">
+        </mat-form-field>
+    </div>
+    
+    <br>
+    
+    <div style="width: 300px;">
+        <mat-form-field class="matDireccion">
+            <mat-label>Dirección (opcional)</mat-label>
+            <textarea style="height: 20px;" matInput [formControl]="direccion"></textarea>
+        </mat-form-field>
+    </div>
+
+<br>
+
+<button [disabled]="(nombre.invalid || apellido.invalid) || documento.invalid" mat-raised-button color="primary" (click)="guardarCambios()" routerLink="">Aceptar</button>
+<button mat-raised-button color="basic" routerLink="">Cancelar</button>
+</form>

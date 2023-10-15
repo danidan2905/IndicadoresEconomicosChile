@@ -1,0 +1,34 @@
+div{
+    width: 100%;
+}
+
+mat-form-field, button{
+    margin-left: 10px;
+}
+
+mat-form-field{
+    width: 75%;
+}
+
+.matDireccion{
+    width: 70%;
+}
+
+h2{
+    margin-left: 10px;
+}
+
+form{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+span, .documento{
+    padding: 1px;
+    border-radius: 5px;
+    margin-left: 10px;
+    color: #EF5350;
+    font-weight: 500;
+}

@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <div class="nav-container">
+        <div>
+            <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>Indicadores económicos Chile</span>
+        </div>
+    </div>
+</mat-toolbar>
+
+<mat-drawer-container>
+    <mat-drawer #drawer mode="side" opened style="width: 12%; padding: 4px;">
+        <li style="list-style: none;" routerLink="/">Clientes</li> 
+        <li style="list-style: none;" routerLink="dolar">Dólar</li>               
+        <li style="list-style: none;" routerLink="UTM">UTM</li>               
+        <li style="list-style: none;" routerLink="UF">UF</li>               
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-card>
+            <mat-card-content>
+                <router-outlet>
+                </router-outlet>
+            </mat-card-content>
+        </mat-card>
+    </mat-drawer-content>
+</mat-drawer-container>

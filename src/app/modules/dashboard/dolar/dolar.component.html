@@ -1,0 +1,31 @@
+<div style="height: 530px;">
+  <h2>Dólar observable</h2>
+  <hr/>
+  <mat-form-field>
+    <mat-label>Filtrar por fechas</mat-label>
+    <mat-select [(value)] = "rangoFecha" (selectionChange) = "filtrarDatosPorFecha(rangoFecha)">
+      <mat-option value="7">Últimos 7 días</mat-option>
+      <mat-option value="15">Últimas 2 semanas</mat-option>
+      <mat-option value="31">Último mes</mat-option>
+    </mat-select>
+  </mat-form-field>
+  Hace {{rangoFecha}} días
+  <h3><span><b>Año:</b> {{ano}}</span><span><b>Fuente:</b> {{fuente}}</span><span><b>Unidad de medida:</b> {{unidad_medida}}</span></h3>
+
+  <ngx-charts-line-chart
+  [view]="view"
+  [scheme]="colorScheme"
+  [legend]="legend"
+  [legendTitle]="legendTitle"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
+  [autoScale]="true"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [timeline]="false"
+  [results]="dataFiltradaFecha"
+  >
+</ngx-charts-line-chart>
+</div>
