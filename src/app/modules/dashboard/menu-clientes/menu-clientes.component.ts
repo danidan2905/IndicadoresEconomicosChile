@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTable} from '@angular/material/table';
-import { EnviarClienteService } from './enviar-cliente.service';
+import { EnviarDatosClienteService } from './enviar-datoscliente.service';
 import { obtenerAPIService } from 'src/app/API.service';
 
 export interface cliente{
@@ -21,8 +21,17 @@ export class MenuClientesComponent implements OnInit {
   tabla!: MatTable<cliente>; 
 
   columnas: string[] = ['id', 'nombre', 'apellido', 'telefono', 'email', 'opciones'];
+  
+  constructor(private APIClientes: obtenerAPIService, private datosCliente: EnviarDatosClienteService) { }
 
-  constructor(private idCliente:EnviarClienteService, private APIClientes: obtenerAPIService) { }
+  enviarDatosCliente(cliente: any){
+    this.datosCliente.actualizarDatosCliente(cliente);
+  }
+
+  eliminarCliente(id: string){
+    this.APIClientes.APIClientesDELETE(id).subscribe(data => {return data;})
+    window.location.reload();
+  }
 
   datosClientes(){
     let cliente: any[] = [];
@@ -47,16 +56,13 @@ export class MenuClientesComponent implements OnInit {
       }
       this.Clientes = cliente;
     });
-  }
-  
-  public Clientes:cliente[] = [];
-  
+  }  
+
+  Clientes:cliente[] = [];
+
   ngOnInit(): void {
     this.datosClientes();
   }
   
-  enviarCliente(cliente: any){
-    this.idCliente.almacenarCliente(cliente);
-  }
   
 }

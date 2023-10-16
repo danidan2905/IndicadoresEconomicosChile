@@ -3,8 +3,6 @@
 <div>
 
     <form>
-
-
         <div style="width: 190px;">
             <mat-form-field>
                 <mat-label>Nombre</mat-label>
@@ -40,38 +38,35 @@
         
         <div style="width: 190px;">
             <mat-form-field>
-                <mat-label>Documento</mat-label>
-                <input matInput [formControl]="documento">
+                <mat-label>Email</mat-label>
+                <input matInput [formControl]="email" (input)="verificarEmail(email.value)">
             </mat-form-field>
             <br>
-            <div class="documento" [hidden]="documento.valid || (documento.value == '')">
-                Documento inválido<br>
-                (Ej: 123.456.789)
-            </div>
-            <div class="documento" [hidden]="!(documento.value == '') || documento.pristine">
-                - Documento obligatorio
-            </div>
-        </div>
-        
-        <div style="width: 190px;">
-            <mat-form-field>
-                <mat-label>Teléfono (opcional)</mat-label>
-                <input matInput [formControl]="telefono">
-            </mat-form-field>
+            <span [hidden]="!email.errors?.['email'] || email.pristine">
+                - Correo incorrecto.
+            </span>
+            <span [hidden]="!(email.value == '') || email.pristine">
+                - El correo es obligatorio.
+            </span>
+            <span *ngIf="verificarEmail(email.value)">
+                - Email ya registrado.
+            </span>
         </div>
         
         <br>
         
-        <div style="width: 300px;">
+        <div style="width: 300px; margin-bottom: 20px;">
             <mat-form-field class="matDireccion">
-                <mat-label>Dirección (opcional)</mat-label>
-                <textarea style="height: 20px;" matInput [formControl]="direccion"></textarea>
+                <mat-label>Teléfono</mat-label>
+                <input style="height: 20px;" matInput [formControl]="telefono">
             </mat-form-field>
+            <br>
+            <span [hidden]="!(telefono.value == '') || telefono.pristine">
+                - El teléfono es obligatorio.
+            </span>
         </div>
         
-        <br>
-        
-        <button [disabled]="(nombre.invalid || apellido.invalid) || documento.invalid" mat-raised-button color="primary" (click)="nuevoCliente()" routerLink="">Aceptar</button>
+        <button [disabled]="(nombre.invalid || apellido.invalid) || (email.invalid || telefono.invalid)" mat-raised-button color="primary" routerLink="" (click)="enviarCliente()">Aceptar</button>
         <button mat-raised-button color="basic" routerLink="">Cancelar</button>
     </form>
 </div>
