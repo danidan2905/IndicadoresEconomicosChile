@@ -75,6 +75,7 @@ export class RegistrarClienteComponent implements OnInit {
       }
     };
     this.APIClientesPOST.APIClientesPOST(nuevoCliente).subscribe(data => {return data});
+    window.location.assign("");
   }
   
   ngOnInit(): void {
