@@ -29,8 +29,10 @@ export class MenuClientesComponent implements OnInit {
   }
 
   eliminarCliente(id: string){
-    this.APIClientes.APIClientesDELETE(id).subscribe(data => {return data;})
-    window.location.reload();
+    this.APIClientes.APIClientesDELETE(id).subscribe(data => {
+      console.log(data);
+      window.location.reload();
+    })
   }
 
   datosClientes(){
