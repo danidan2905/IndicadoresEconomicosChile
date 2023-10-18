@@ -23,9 +23,10 @@ export class EditarClienteComponent implements OnInit {
         "correo": this.email.value,
       }
     };
-    this.APICliente.APIClientesPUT(clienteGuardado, this.clienteSeleccionado.id).subscribe(data => {return data});
-    //this.router.navigate([""], {replaceUrl: true});
-    window.location.assign("");
+    this.APICliente.APIClientesPUT(clienteGuardado, this.clienteSeleccionado.id).subscribe(data => {
+      console.log(data);
+      window.location.assign("");
+    });
   }
   
   clienteSeleccionado: any = this.datosCliente.obtenerCliente();
