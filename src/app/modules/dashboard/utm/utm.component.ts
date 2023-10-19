@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { ILineChart, DATA_API } from 'src/app/models/charts.interface';
-import { DATA_DEFAULT } from 'src/app/models/bar-chart';
 import { obtenerAPIService } from 'src/app/API.service';
 
 @Component({
@@ -83,7 +82,7 @@ export class UtmComponent implements OnInit {
           "value": this.datosGrafica[0].series[i].value,
           "name": this.datosGrafica[0].series[i].name.substring(5, 10)
         }
-        this.dataFiltradaFecha[0].series.push(serie);
+        this.dataFiltradaFecha[0].series.unshift(serie);
         i++;
       }
       else{
@@ -103,7 +102,7 @@ export class UtmComponent implements OnInit {
           "value": this.datosGrafica[0].series[i].value,
           "name": this.datosGrafica[0].series[i].name.substring(5, 10)
         }
-        this.dataFiltradaFecha[0].series.push(serie);
+        this.dataFiltradaFecha[0].series.unshift(serie);
       }
     }
   }
