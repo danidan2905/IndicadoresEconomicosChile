@@ -5,47 +5,54 @@
 <br>
 
 <span class="tituloTabla">Clientes registrados:</span>
-<table mat-table [dataSource]="Clientes" class="mat-elevation-z8">
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef class="columnaID"> ID </th>
-      <td mat-cell *matCellDef="let element" class="columnaID"> {{element.id}} </td>
-    </ng-container>
+<div>
+
+  <table mat-table [dataSource]="tabla" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef class="columnaID"> ID </th>
+        <td mat-cell *matCellDef="let element" class="columnaID"> {{element.id}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef class="columnaNombre"> Nombre </th>
+        <td mat-cell *matCellDef="let element" class="columnaNombre"> {{element.nombre}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef class="columnaApellido"> Apellido </th>
+        <td mat-cell *matCellDef="let element" class="columnaApellido"> {{element.apellido}} </td>
+      </ng-container>
   
-    <!-- Name Column -->
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef class="columnaNombre"> Nombre </th>
-      <td mat-cell *matCellDef="let element" class="columnaNombre"> {{element.nombre}} </td>
-    </ng-container>
+      <ng-container matColumnDef="telefono">
+        <th mat-header-cell *matHeaderCellDef class="columnaTelefono"> Teléfono </th>
+        <td mat-cell *matCellDef="let element" class="columnaTelefono"> {{element.telefono}} </td>
+      </ng-container>
   
-    <!-- Weight Column -->
-    <ng-container matColumnDef="apellido">
-      <th mat-header-cell *matHeaderCellDef class="columnaApellido"> Apellido </th>
-      <td mat-cell *matCellDef="let element" class="columnaApellido"> {{element.apellido}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="telefono">
-      <th mat-header-cell *matHeaderCellDef class="columnaTelefono"> Teléfono </th>
-      <td mat-cell *matCellDef="let element" class="columnaTelefono"> {{element.telefono}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef class="columnaDireccion"> Email </th>
-      <td mat-cell *matCellDef="let element" class="columnaDireccion"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="opciones">
-      <th mat-header-cell *matHeaderCellDef class="columnaOpciones">Opciones</th>
-      <td mat-cell *matCellDef="let element" class="columnaOpciones">
-        <button routerLink="editarCliente" mat-icon-button color="primary" aria-label="Example icon button with a delete icon" (click)="enviarDatosCliente(element)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="primary" (click)="eliminarCliente(element.id)" aria-label="Example icon button with a delete icon">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-    <tr mat-row *matRowDef="let fila; columns: columnas;"></tr>
-</table>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef class="columnaDireccion"> Email </th>
+        <td mat-cell *matCellDef="let element" class="columnaDireccion"> {{element.email}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="opciones">
+        <th mat-header-cell *matHeaderCellDef class="columnaOpciones">Opciones</th>
+        <td mat-cell *matCellDef="let element" class="columnaOpciones">
+          <button routerLink="editarCliente" mat-icon-button color="primary" aria-label="Example icon button with a delete icon" (click)="enviarDatosCliente(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="eliminarCliente(element.id)" aria-label="Example icon button with a delete icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let fila; columns: columnas;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5 , 10, 20]"
+                  showFirstLastButtons
+                  aria-label="Select page of periodic elements">
+    </mat-paginator>
+</div>

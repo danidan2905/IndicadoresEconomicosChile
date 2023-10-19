@@ -22,6 +22,8 @@ import {MatTableModule} from '@angular/material/table';
 import { MenuClientesComponent } from './menu-clientes/menu-clientes.component';
 import {EditarClienteComponent} from "./menu-clientes/editar-cliente/editar-cliente.component"
 import {RegistrarClienteComponent} from "./menu-clientes/registrar-cliente/registrar-cliente.component"
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 
 const routes: Routes = [
@@ -83,7 +85,8 @@ const routes: Routes = [
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class DashboardModule { }

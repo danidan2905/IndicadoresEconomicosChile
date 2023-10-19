@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatTable} from '@angular/material/table';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import { EnviarDatosClienteService } from './enviar-datoscliente.service';
 import { obtenerAPIService } from 'src/app/API.service';
+import {MatPaginator} from '@angular/material/paginator';
 
 export interface cliente{
   id: number,
@@ -11,32 +12,44 @@ export interface cliente{
   email: string
 }
 
+
+
 @Component({
   selector: 'app-menu-clientes',
   templateUrl: './menu-clientes.component.html',
   styleUrls: ['./menu-clientes.component.css']
 })
 export class MenuClientesComponent implements OnInit {
-  @ViewChild(MatTable)
-  tabla!: MatTable<cliente>; 
-
+  tabla!: MatTableDataSource<any>;
   columnas: string[] = ['id', 'nombre', 'apellido', 'telefono', 'email', 'opciones'];
+
+  @ViewChild(MatPaginator, {static: true}) paginador!: MatPaginator;
+  
+  
   
   constructor(private APIClientes: obtenerAPIService, private datosCliente: EnviarDatosClienteService) { }
-
+  
+  
+  ngOnInit(): void {
+    
+    this.tabla = new MatTableDataSource();
+    this.tabla.paginator = this.paginador;
+    this.datosClientes();
+  }
+  
   enviarDatosCliente(cliente: any){
     this.datosCliente.actualizarDatosCliente(cliente);
   }
-
+  
   eliminarCliente(id: string){
     this.APIClientes.APIClientesDELETE(id).subscribe(data => {
       console.log(data);
       window.location.reload();
     })
   }
-
+  
   datosClientes(){
-    let cliente: any[] = [];
+    let cliente: cliente[] = [];
     this.APIClientes.APIClientesGET().subscribe(data => {
       let x = data.data.length;
       let i = 0;
@@ -56,15 +69,8 @@ export class MenuClientesComponent implements OnInit {
           i++;
         }
       }
-      this.Clientes = cliente;
+      this.tabla.data = cliente;
     });
   }  
-
-  Clientes:cliente[] = [];
-
-  ngOnInit(): void {
-    this.datosClientes();
-  }
-  
   
 }
