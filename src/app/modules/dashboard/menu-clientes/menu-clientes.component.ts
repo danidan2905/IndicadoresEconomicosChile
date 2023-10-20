@@ -29,6 +29,8 @@ export class MenuClientesComponent implements OnInit {
     
     this.tabla = new MatTableDataSource();
     this.datosClientes(this.elementos, this.pagActual);
+    console.log("Pagina actual" + this.pagActual)
+    console.log(this.pagTotal)
   }
   
   enviarDatosCliente(cliente: any){
@@ -44,7 +46,7 @@ export class MenuClientesComponent implements OnInit {
   
   elementos: string = "5";
   pagActual: number = 1;
-  pagTotal: number = 0;
+  pagTotal: number = 1;
 
   public btnDisabled1: boolean = false;
   
@@ -86,11 +88,14 @@ export class MenuClientesComponent implements OnInit {
   datosClientes(valorElementos: string, nroPagina: number){
     let pagination = this.APIClientes.pagination.set("pagination[pageSize]", valorElementos).set("pagination[page]", nroPagina);
     this.APIClientes.opcionesGET.params = pagination;
-    console.log(this.APIClientes.opcionesGET)
     let cliente: cliente[] = [];
     this.APIClientes.APIClientesGET().subscribe(data => {
       this.pagActual = data.meta.pagination.page;
       this.pagTotal = data.meta.pagination.pageCount;
+      if (this.pagActual == 1 && this.pagTotal == 1){
+        this.btnDisabled1 = true;
+        this.btnDisabled2 = true;
+      }
       let x = data.data.length;
       let i = 0;
       while (true){
