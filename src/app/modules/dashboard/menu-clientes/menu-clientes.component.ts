@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import { EnviarDatosClienteService } from './enviar-datoscliente.service';
 import { obtenerAPIService } from 'src/app/API.service';
-import {MatPaginator} from '@angular/material/paginator';
 
 export interface cliente{
   id: number,
@@ -21,11 +20,7 @@ export interface cliente{
 })
 export class MenuClientesComponent implements OnInit {
   tabla!: MatTableDataSource<any>;
-  columnas: string[] = ['id', 'nombre', 'apellido', 'telefono', 'email', 'opciones'];
-
-  @ViewChild(MatPaginator, {static: true}) paginador!: MatPaginator;
-  
-  
+  columnas: string[] = ['id', 'nombre', 'apellido', 'telefono', 'email', 'opciones'];  
   
   constructor(private APIClientes: obtenerAPIService, private datosCliente: EnviarDatosClienteService) { }
   
@@ -33,8 +28,7 @@ export class MenuClientesComponent implements OnInit {
   ngOnInit(): void {
     
     this.tabla = new MatTableDataSource();
-    this.tabla.paginator = this.paginador;
-    this.datosClientes();
+    this.datosClientes(this.elementos, this.pagActual);
   }
   
   enviarDatosCliente(cliente: any){
@@ -48,9 +42,55 @@ export class MenuClientesComponent implements OnInit {
     })
   }
   
-  datosClientes(){
+  elementos: string = "5";
+  pagActual: number = 1;
+  pagTotal: number = 0;
+
+  public btnDisabled1: boolean = false;
+  
+  cambioPaginaMAS(pagTotal: number){
+    this.pagActual++;
+    this.btnDisabled2 = false;
+    if (this.pagActual < pagTotal){
+      this.datosClientes(this.elementos, this.pagActual);
+    }
+    else if (this.pagActual == pagTotal){
+      this.datosClientes(this.elementos, this.pagActual);
+      this.btnDisabled1 = true;
+    }
+  }
+
+  public btnDisabled2: boolean = true;
+  cambioPaginaMENOS(pagTotal: number){
+    this.pagActual--;
+    this.btnDisabled1 = false;
+    if(this.pagActual == 1){
+      this.datosClientes(this.elementos, this.pagActual);
+      this.btnDisabled2 = true;
+    }
+    else if (this.pagActual < pagTotal){
+      this.btnDisabled2 = false;
+      console.log(this.pagActual);
+      this.datosClientes(this.elementos, this.pagActual);
+      console.log("Faltan paginas con datos");
+    }
+    else if (this.pagActual == pagTotal){
+      this.btnDisabled2 = false;
+      this.btnDisabled1 = true;
+      console.log(this.pagActual);
+      this.datosClientes(this.elementos, this.pagActual);
+      console.log("Ultima pagina con datos")
+    }
+  }
+  
+  datosClientes(valorElementos: string, nroPagina: number){
+    let pagination = this.APIClientes.pagination.set("pagination[pageSize]", valorElementos).set("pagination[page]", nroPagina);
+    this.APIClientes.opcionesGET.params = pagination;
+    console.log(this.APIClientes.opcionesGET)
     let cliente: cliente[] = [];
     this.APIClientes.APIClientesGET().subscribe(data => {
+      this.pagActual = data.meta.pagination.page;
+      this.pagTotal = data.meta.pagination.pageCount;
       let x = data.data.length;
       let i = 0;
       while (true){
