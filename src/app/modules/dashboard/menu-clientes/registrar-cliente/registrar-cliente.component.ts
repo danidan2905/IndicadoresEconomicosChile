@@ -82,11 +82,9 @@ export class RegistrarClienteComponent implements OnInit {
     };
     this.APIClientesPOST.APIClientesPOST(nuevoCliente).subscribe(
       data => {
-      console.log(data)
       window.location.assign("");
     },
     (error: HttpErrorResponse) => {
-      console.log(error)
       if (error.status == 400 || error.status == 500){
         this.snackBar.open("El correo introducido es incorrecto", "Cerrar");
       }
