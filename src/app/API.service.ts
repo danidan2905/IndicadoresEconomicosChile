@@ -45,6 +45,14 @@ export class obtenerAPIService {
 
   constructor(private http: HttpClient) { }
 
+  public objetivoEncontrado = {}
+
+  public APIClientesBuscador(objetivo: string, index: number){
+    let filtros = ["nombre", "apellido", "correo"];
+    let URLAPIBuscar = "https://apicreditapp.keotecnologia.com/api/clientes?filters[" + filtros[index] + "][$eq]=" + objetivo;
+    return this.http.get<any>(URLAPIBuscar, this.opcionesGET);
+  }
+
   public APIClientesGET(): Observable<any>{
     return this.http.get<any>(this.urlAPIClientes, this.opcionesGET);
   }

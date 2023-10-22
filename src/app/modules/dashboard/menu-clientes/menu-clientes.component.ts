@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { EnviarDatosClienteService } from './enviar-datoscliente.service';
 import { obtenerAPIService } from 'src/app/API.service';
+import {FormControl} from "@angular/forms";
+
 
 export interface cliente{
   id: number,
@@ -24,6 +26,36 @@ export class MenuClientesComponent implements OnInit {
   
   constructor(private APIClientes: obtenerAPIService, private datosCliente: EnviarDatosClienteService) { }
   
+  public buscador = new FormControl();
+
+  buscar(){
+    let i = 0
+    this.tabla.data = [];
+    while(true){
+      this.APIClientes.APIClientesBuscador(this.buscador.value, i).subscribe(data => {
+        if (data.meta.pagination.total >= 1){
+          let objetivoEncontrado: any = [];
+          objetivoEncontrado.push(
+            {
+              id: data.data[0].id,
+              nombre: data.data[0].attributes.nombre,
+              apellido: data.data[0].attributes.apellido,
+              telefono: data.data[0].attributes.telefono,
+              email: data.data[0].attributes.correo
+            }
+          )
+          this.tabla.data = (objetivoEncontrado);
+        }
+      });
+      if (i == 2){
+        break;
+      }
+      i++;
+    }
+    if (this.buscador.value == ""){
+      this.datosClientes(this.elementos, this.pagActual);
+    }
+  }
   
   ngOnInit(): void {
     
