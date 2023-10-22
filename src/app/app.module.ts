@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,9 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     NgxChartsModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    NgbModule  
-],
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

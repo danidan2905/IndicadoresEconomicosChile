@@ -23,7 +23,6 @@ import { MenuClientesComponent } from './menu-clientes/menu-clientes.component';
 import {EditarClienteComponent} from "./menu-clientes/editar-cliente/editar-cliente.component"
 import {RegistrarClienteComponent} from "./menu-clientes/registrar-cliente/registrar-cliente.component"
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -90,8 +89,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatPaginatorModule,
-    MatSnackBarModule
+    MatPaginatorModule
   ]
 })
 export class DashboardModule { }
