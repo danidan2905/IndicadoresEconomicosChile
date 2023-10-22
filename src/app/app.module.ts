@@ -5,9 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     NgxChartsModule,
     HttpClientModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    NgbModule  
+],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -45,6 +45,9 @@
             <span [hidden]="!email.errors?.['email'] || email.pristine">
                 - Correo incorrecto.
             </span>
+            <span [hidden]="mensajeErrorEmail">
+                - El correo es incorrecto.
+            </span>
             <span [hidden]="!(email.value == '') || email.pristine">
                 - El correo es obligatorio.
             </span>

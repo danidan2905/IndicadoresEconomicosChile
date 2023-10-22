@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import { obtenerAPIService } from 'src/app/API.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+
 
 @Component({
   selector: 'app-registrar-cliente',
@@ -9,7 +13,7 @@ import { obtenerAPIService } from 'src/app/API.service';
 })
 export class RegistrarClienteComponent implements OnInit {
 
-  constructor(private APIClientesPOST: obtenerAPIService, private APICliente: obtenerAPIService) { }
+  constructor(private APIClientesPOST: obtenerAPIService, private APICliente: obtenerAPIService, private snackBar: MatSnackBar) { }
 
   public nombre = new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
 
@@ -65,6 +69,8 @@ export class RegistrarClienteComponent implements OnInit {
     console.log(this.Clientes);
   }
 
+  public mensajeErrorEmail: boolean = true;
+
   enviarCliente(){
     let nuevoCliente = {
       "data": {
@@ -74,10 +80,22 @@ export class RegistrarClienteComponent implements OnInit {
         "correo": this.email.value,
       }
     };
-    this.APIClientesPOST.APIClientesPOST(nuevoCliente).subscribe(data => {
-      console.log(data);
+    this.APIClientesPOST.APIClientesPOST(nuevoCliente).subscribe(
+      data => {
+      console.log(data)
       window.location.assign("");
-    });
+    },
+    (error: HttpErrorResponse) => {
+      console.log(error)
+      if (error.status == 400 || error.status == 500){
+        this.snackBar.open("El correo introducido es incorrecto", "Cerrar");
+      }
+      else{
+        this.snackBar.open("El correo introducido es incorrecto", "Cerrar");
+      }
+    }
+
+    )
   }
   
   ngOnInit(): void {
