@@ -3,7 +3,7 @@
 <button mat-raised-button color="primary" routerLink="registrarCliente">Registrar cliente</button>
 <mat-form-field style="float: right;">
   <mat-label>Buscador</mat-label>
-  <input matInput placeholder="" [formControl]="buscador" (input)="buscar()">
+  <input matInput [formControl]="buscador" (input)="buscar()">
 </mat-form-field><br>
 <br>
 
